@@ -1,0 +1,51 @@
+{{include file="header.html"}}
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="anchor.php?action=new" target="_self">添加主持人信息</a>&nbsp;
+    	<a href="anchor.php" target="_self">主持人信息管理(全台)</a>&nbsp;
+		{{foreach  from=$channel item=channel name=channel}}
+			<a href="anchor.php?action=anchor&cid={{$channel.channelId}}" target="_self">{{$channel.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+<br />
+<form name="fmEdit" id="fmEdit" action="anchor.php?action=delete" method="post">
+    <table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+		<tr>
+        	<td colspan="3" class="head">主持人信息管理</td>
+        </tr>
+        <tr>
+			<td width="70%" class="head_2">主持人名称</td>          	
+	  	  	<td width="10%" class="head_2">管理</td>
+			<td width="20%" class="head_2">删除</td>
+		</tr>
+		{{foreach from=$anchor item=anchor name=anchor}}
+		<tr>
+			<td width="70%" class="b"><a href="http://app.rgd.com.cn/radio_app/anchor.php?anchorId={{$anchor.anchorId}}" target="_blank">{{$anchor.name}}</a></td>           
+   			<td width="10%" class="b">
+            	<a href='anchor.php?action=new&anchorId={{$anchor.anchorId}}'>修改</a>
+		  	</td>
+			<td width="20%" class="b">
+				<input type="checkbox" name="chk1[]" id="chk1" value="{{$anchor.anchorId}}" />
+			</td>
+		</tr>
+		{{/foreach}}
+		<tr>
+			<td colspan="2" class="b">
+				<input type="submit" name="Submit" value="删除" />
+			</td>
+			<td width="20%" class="b">
+				全选/全不选<input type="checkbox" name="chk2" id="chk2" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="b">{{$paggingbar}}</td>
+		</tr>  
+	</table>
+</form>
+{{include file="footer.html"}}

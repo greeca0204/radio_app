@@ -1,0 +1,72 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="programHistory.php?action=new" target="_self">添加历史回顾信息</a>&nbsp;
+		<a href="programHistory.php" target="_self">历史回顾信息管理（全台）</a>&nbsp;
+		{{foreach  from=$channel2 item=channel2 name=channel2}}
+			<a href="programHistory.php?action=history&cid={{$channel2.channelId}}" target="_self">{{$channel2.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+<br />
+<form name="fmEdit" id="fmEdit" method="post" action="programHistory.php?action=save" enctype="multipart/form-data">
+	<input type="hidden" name="programId" id="programId" value="{{$programHistory.programId}}" />
+	<table width="70%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+		<tr>
+			<td colspan="2" class="head">历史回顾信息管理</td>
+        </tr>
+        <tr>
+			<td width="20%" class="b">*频道</td>
+			<td class="sel">
+				<select  name="Channel" id="Channel">
+					{{foreach from=$channel3 item=channel3 name=channel3}}
+					<option value="{{$channel3.channelId}}" {{if $channel3.channelId==$programHistory.Channel}}selected="selected"{{/if}}>{{$channel3.name}}</option>
+					{{/foreach}}
+				</select>
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*节目名称</td>
+			<td class="b">
+				<input type="text" name="name" id="name" value="{{$programHistory.name}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">地址</td>
+			<td class="b">
+				<input type="text" name="url" id="url" value="{{$programHistory.url}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*日期</td>
+			<td class="b">
+				<input type="text" name="date_time" id="date_time" onClick="return Calendar('date_time');"  value="{{$programHistory.date_time|date_format:'%Y-%m-%d'}}" class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">点击次数</td>
+			<td class="b">
+				<input type="text" name="clickCount" id="clickCount" value="{{$programHistory.clickCount}}"  class="frminput" />
+			</td>
+	  	</tr>	  	
+	  	<tr>
+			<td width="20%" class="b">简介</td>
+			<td class="b">
+				<input type="text" name="summary" id="summary" value="{{$programHistory.summary}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td colspan="2" class="b">
+				<input type="submit" value="提交">
+				<input type="reset" value="重置">
+			</td>
+		</tr>
+	</table>
+</form>
+{{include file='footer.html'}}

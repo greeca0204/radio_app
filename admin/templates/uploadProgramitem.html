@@ -1,0 +1,28 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="programitemlist.php?action=upload" target="_self">批量导入节目单信息</a>&nbsp;
+		<a href="programitemlist.php" target="_self">节目单信息管理</a>&nbsp;
+		{{foreach  from=$channel item=channel name=channel}}
+			<a href="programitemlist.php?action=item&cid={{$channel.channelId}}" target="_self">{{$channel.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+
+<br />
+<form method="post" action="programitemlist.php?action=uploadFile" enctype="multipart/form-data">
+	<p>参考样例下载：<a href="programitemlist.csv">demo</a></p>
+	<p>文件操作如下,文件格式请参考demo文件：</p>
+	<p><img src="images/1.png" /></p>
+	<p><img src="images/2.png" /></p>
+	<p>请上传CSV文件</p>
+	<input id="fname" name="fname" type="file" />
+	<input type="submit" value="提交" />
+</form>
+{{include file='footer.html'}}

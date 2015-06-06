@@ -1,0 +1,113 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="news.php?action=new" target="_self">添加新闻信息</a>&nbsp;
+    	<a href="news.php" target="_self">新闻信息管理</a>
+    </td>
+  </tr>
+</table>
+<br />
+<form name="fmEdit" id="fmEdit" method="post" action="news.php?action=save" enctype="multipart/form-data">
+	<input type="hidden" name="newsId" id="newsId" value="{{$news.newsId}}" />
+	<table width="70%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+		<tr>
+			<td colspan="2" class="head">新闻信息管理</td>
+        </tr>
+        <tr>
+			<td width="20%" class="b">*新闻标题</td>
+			<td class="b">
+				<input type="text" name="title" id="title" value="{{$news.title}}"  onkeyup="preloadTitle();"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">新闻图片</td>
+            <td class="b_sel">        
+				<input name="image" type="file">
+				<input type="hidden" name="hasimg" value="{{$news.image}}" />  
+		  </td>
+	  	</tr>
+        {{if $news.image != ''}}
+        <tr>
+			<td width="20%" class="b">新闻图片</td>
+			<td class="b">
+				<img src="../{{$news.image}}" width="341" height="341" alt="" />
+			</td>
+	  	</tr>
+	  	{{/if}} 
+	  	<tr>
+			<td width="20%" class="b">新闻概述</td>
+			<td class="b">
+				<textarea name="summary"  id="summary" style="width:100%;height:100px; resize:none;">{{$news.summary}}</textarea>
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">新闻内容</td>
+			<td class="b">
+				<input type="text" name="content" id="content" value="{{$news.content}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">*是否推荐</td>
+			<td class="sel">
+				<select  name="isComment" id="isComment">
+					<option value="1" {{if $news.isComment==1}}selected="selected"{{/if}}>推荐</option>
+					<option value="0" {{if $news.isComment==0}}selected="selected"{{/if}}>不推荐</option>
+				</select>
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">点击次数</td>
+			<td class="b">
+				<input type="text" name="clickCount" id="clickCount" value="{{$news.clickCount}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">*发布</td>
+			<td class="sel">
+				<select  name="isDeploy" id="isDeploy">
+					<option value="1" {{if $news.isDeploy==1}}selected="selected"{{/if}}>发布</option>
+					<option value="0" {{if $news.isDeploy==0}}selected="selected"{{/if}}>不发布</option>
+				</select>
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">*发布时间</td>
+			<td class="b">
+				<input type="text" name="deployTime" id="deployTime" onClick="return Calendar('deployTime');"  value="{{$news.deployTime|date_format:'%Y-%m-%d'}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">*创建时间</td>
+			<td class="b">
+				<input type="text" name="create_time" id="create_time" onClick="return Calendar('create_time');" value="{{$news.create_time|date_format:'%Y-%m-%d'}}"   class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">地址</td>
+			<td class="b">
+				<input type="text" name="url" id="url" value="{{$news.url}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">新闻内容</td>
+			<td class="b">
+				<textarea name="content1"  id="content1" style="width:100%;height:350px; resize:none;">{{$news.news_content}}</textarea>
+			</td>
+	  	</tr>
+		
+		<tr>
+			<td colspan="2" class="b">
+				<input type="submit" value="提交" />
+				<input type="reset" value="重置" />
+				
+			</td>
+		</tr>
+	</table>
+</form>
+{{include file='footer.html'}}

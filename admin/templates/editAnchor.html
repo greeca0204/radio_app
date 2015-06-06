@@ -1,0 +1,83 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="anchor.php?action=new" target="_self">添加主持人信息</a>&nbsp;
+		<a href="anchor.php" target="_self">主持人信息管理(全台)</a>&nbsp;
+		{{foreach  from=$channel2 item=channel2 name=channel2}}
+			<a href="anchor.php?action=anchor&cid={{$channel2.channelId}}" target="_self">{{$channel2.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+<br />
+<form name="fmEdit" id="fmEdit" method="post" action="anchor.php?action=save" enctype="multipart/form-data">
+	<input type="hidden" name="anchorId" id="anchorId" value="{{$anchor.anchorId}}" />
+	<table width="70%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+		<tr>
+			<td colspan="2" class="head">主持人信息管理</td>
+        </tr>
+        <tr>
+			<td width="20%" class="b">*主播名称</td>
+			<td class="b">
+				<input type="text" name="name" id="name" value="{{$anchor.name}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">头像</td>
+            <td class="b_sel">        
+				<input name="image" type="file">
+				<input type="hidden" name="hasimg" value="{{$anchor.image}}" />  
+		  </td>
+	  	</tr>
+        {{if $anchor.image != ''}}
+        <tr>
+			<td width="20%" class="b">image</td>
+			<td class="b">
+				<img src="../{{$anchor.image}}" width="341" height="341" alt="" />
+			</td>
+	  	</tr>
+	  	{{/if}} 
+	  	<tr>
+			<td width="20%" class="b">*频道</td>
+			<td class="sel">
+				<select  name="Channel" id="Channel">
+					{{foreach from=$channel item=channel name=channel}}
+					<option value="{{$channel.channelId}}" {{if $channel.channelId==$anchor.Channel}}selected="selected"{{/if}}>{{$channel.name}}</option>
+					{{/foreach}}
+				</select>
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">概述</td>
+			<td class="b">
+				<input type="text" name="summary" id="summary" value="{{$anchor.summary}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">点击次数</td>
+			<td class="b">
+				<input type="text" name="clickCount" id="clickCount" value="{{$anchor.clickCount}}"  class="frminput" />
+			</td>
+	  	</tr>
+	  	<tr>
+			<td width="20%" class="b">主持人介绍</td>
+			<td class="b">
+				<textarea name="content1"  id="content1" style="width:100%;height:350px; resize:none;">{{$anchor.anchor_content}}</textarea>
+				
+			</td>
+	  	</tr>
+	  	
+		<tr>
+			<td colspan="2" class="b">
+				<input type="submit" value="提交">
+				<input type="reset" value="重置">
+			</td>
+		</tr>
+	</table>
+</form>
+{{include file='footer.html'}}

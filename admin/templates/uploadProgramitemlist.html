@@ -1,0 +1,22 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="programitemlist.php?action=upload" target="_self">批量导入节目单信息</a>&nbsp;
+		<a href="programitemlist.php" target="_self">节目单信息管理</a>&nbsp;
+		{{foreach  from=$channel item=channel name=channel}}
+			<a href="programitemlist.php?action=item&cid={{$channel.channelId}}" target="_self">{{$channel.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+<br />
+<p>是否需要导入节目单：</p>
+
+<p>当前节目单为：{{$fname}}</p>
+<p><a href="uploadProgramitemlist.php?fname={{$fname}}">导入节目单</a>&nbsp;<a href="programitemlist.php">不导入，回到节目单列表</a></p>
+{{include file='footer.html'}}

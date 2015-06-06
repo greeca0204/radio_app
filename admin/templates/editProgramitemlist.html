@@ -1,0 +1,72 @@
+{{include file='header.html'}}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+  <tr>
+    <td class="head" colspan="2"><b>操作菜单</b></td>
+  </tr>
+  <tr>
+    <td class="b_title">
+    	<a href="programitemlist.php?action=upload" target="_self">批量导入节目单信息</a>&nbsp;
+		<a href="programitemlist.php" target="_self">节目单信息管理</a>&nbsp;
+		{{foreach  from=$channel2 item=channel2 name=channel2}}
+			<a href="programitemlist.php?action=item&cid={{$channel2.channelId}}" target="_self">{{$channel2.name}}</a>&nbsp;
+		{{/foreach}}
+    </td>
+  </tr>
+</table>
+<br />
+<form name="fmEdit" id="fmEdit" method="post" action="programitemlist.php?action=save" enctype="multipart/form-data">
+	<input type="hidden" name="programItemId" id="programItemId" value="{{$programitemlist.programItemId}}" />
+	<table width="70%" align="center" cellspacing="1" cellpadding="3" class="i_table">
+		<tr>
+			<td colspan="2" class="head">节目单信息管理</td>
+        </tr>
+        <tr>
+			<td width="20%" class="b">*频道</td>
+			<td class="sel">
+				<select  name="Channel" id="Channel">
+					{{foreach from=$channel3 item=channel3 name=channel3}}
+					<option value="{{$channel3.channelId}}" {{if $channel3.channelId==$programitemlist.Channel}}selected="selected"{{/if}}>{{$channel3.name}}</option>
+					{{/foreach}}
+				</select>
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*主播</td>
+			<td class="b">
+				<input type="text" name="anchorNames" id="anchorNames" value="{{$programitemlist.anchorNames}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*节目名称</td>
+			<td class="b">
+				<input type="text" name="name" id="name" value="{{$programitemlist.name}}"  class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*开始时间</td>
+			<td class="b">
+				<input type="text" name="beginTime" id="beginTime" value="{{$programitemlist.beginTime|date_format:'%H:%M:%S'}}" class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*结束时间</td>
+			<td class="b">
+				<input type="text" name="endTime" id="endTime" value="{{$programitemlist.endTime|date_format:'%H:%M:%S'}}" class="frminput" />
+			</td>
+	  	</tr>
+		<tr>
+			<td width="20%" class="b">*节目日期</td>
+			<td class="b">
+				<input type="text" name="currdate" id="currdate" onClick="return Calendar('currdate');"  value="{{$programitemlist.currdate|date_format:'%Y-%m-%d'}}" class="frminput" />
+			</td>
+	  	</tr>	  	
+		<tr>
+			<td colspan="2" class="b">
+				<input type="submit" value="提交">
+				<input type="reset" value="重置">
+			</td>
+		</tr>
+	</table>
+</form>
+{{include file='footer.html'}}
